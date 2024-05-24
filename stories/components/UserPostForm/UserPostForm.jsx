@@ -4,6 +4,8 @@ import './FormComponent.css'; // Import the CSS file
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
+
+
 const UserPostForm = () => {
   const [formData, setFormData] = useState({
     image: '',

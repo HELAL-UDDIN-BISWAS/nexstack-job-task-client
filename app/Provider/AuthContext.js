@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }) => {
       .then(res => {
         localStorage.setItem('token', res.data.token)
        localStorage.setItem('userId', res.data.userId)
+       console.log(res)
         setAuthState({
           token: res.data.token,
           user: res.data.userId
@@ -55,10 +56,10 @@ export const AuthProvider = ({ children }) => {
     const res = await axios.post('https://job-tasks.vercel.app/register', { name, email, password })
       .then(res => {
         console.log(res)
-        localStorage.setItem('token', res.data.jwtToken);
+        localStorage.setItem('token', res.data.token);
         localStorage.setItem('userId', res.data.userId);
         setAuthState({
-          token: res.data.jwtToken,
+          token: res.data.token,
           user: res.data.userId
         });
         Swal.fire({

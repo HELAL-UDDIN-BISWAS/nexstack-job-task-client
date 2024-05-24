@@ -6,7 +6,7 @@ import UserPostForm from "@/stories/components/UserPostForm/UserPostForm";
 
 const Create = () => {
 useLayoutEffect(()=>{   
-    const token=localStorage.getItem('userId')
+    const token=localStorage.getItem('token' == true)
        if (!token){
            redirect('/login')
         }   
