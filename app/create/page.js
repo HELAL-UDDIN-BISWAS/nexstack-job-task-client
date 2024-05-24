@@ -1,14 +1,12 @@
 "use client"
-import { Button } from "@/stories/Button";
-import LoginForm from "@/stories/LoginForm";
-import { useContext, useLayoutEffect } from "react";
-
+import {  useLayoutEffect } from "react";
 import { redirect } from 'next/navigation'
+import UserPostForm from "@/stories/components/UserPostForm/UserPostForm";
 
 
 const Create = () => {
-    const token=localStorage.getItem('token')
 useLayoutEffect(()=>{   
+    const token=JSON.parse(localStorage.getItem('token'))
        if (!token){
            redirect('/login')
         }   
@@ -17,14 +15,7 @@ useLayoutEffect(()=>{
     return (
         <div>
             create page
-            <Button
-                label="Button"
-                onClick={() => { console.log("hello everryone") }}
-                Secondary
-            />
-            <div className="flex items-center justify-center">
-                <LoginForm />
-            </div>
+            <UserPostForm/>
 
         </div>
     );

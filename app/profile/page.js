@@ -1,14 +1,23 @@
 "use client"
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../Provider/AuthContext';
 import { Button } from '@/stories/Button';
 import Link from 'next/link';
 
 
 const Profile = () => {
+    const [token,setToken]=useState()
+    const [userId,setUserId]=useState()
     const { user } = useContext(AuthContext);
-    const token = localStorage.getItem('token')
-    const userId = localStorage.getItem('userId')
+
+    useEffect(()=>{
+        const token = JSON.parse(localStorage.getItem('token'))
+        const userId = JSON.parse(localStorage.getItem('userId'))
+        setToken(token)
+        setUserId(userId)
+
+    },[])
+   
 
 
     return (

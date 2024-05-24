@@ -58,12 +58,13 @@ logout()
                     <Link href="/profile">
                         <p className="text-white hover:text-gray-400">Profile</p>
                     </Link>
-                    <Link href="/services">
-                        <p className="text-white hover:text-gray-400">Services</p>
+                    <Link href="/create">
+                        <p className="text-white hover:text-gray-400">CreatePost</p>
                     </Link>
-                    <Link href="/contact">
-                        <p className="text-white hover:text-gray-400">Contact</p>
+                    <Link href="/allpost">
+                        <p className="text-white hover:text-gray-400">My Post</p>
                     </Link>
+                    
                 </div>
                 <div className="hidden gap-3 md:flex">
                     {

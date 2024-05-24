@@ -2,43 +2,82 @@
 "use client"
 import axios from 'axios';
 import { createContext, useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [authState, setAuthState] = useState({  });
 
-  const [authState, setAuthState] = useState({
-    token: localStorage.getItem('token'),
-    userId: localStorage.getItem('userId'),
-  });
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem('token'))
+    const userId = JSON.parse(localStorage.getItem('userId'))
+    const alltoken = {
+      token,
+      userId
+    }
+    setAuthState(alltoken)
+  }, [])
   console.log(authState)
   const login = async (email, password) => {
     const res = await axios.post('http://localhost:5000/login', { email, password })
       .then(res => {
-        localStorage.setItem('token', res.data.jwtToken);
-        localStorage.setItem('userId', res.data.userId);
+        JSON.stringify(localStorage.setItem('token', res.data.token));
+        JSON.stringify(localStorage.setItem('userId', res.data.userId));
         setAuthState({
           token: res.data.token,
           userId: res.data.userId,
         });
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500
+        });
       })
-      .catch(error => console.log(error))
+      .catch(error =>{
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Invalid User",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        console.log(error)
+      })
 
   };
 
   const register = async (name, email, password) => {
     const res = await axios.post('http://localhost:5000/register', { name, email, password })
-    .then(res => {
-      console.log(res)
-      localStorage.setItem('token', res.data.jwtToken);
-      localStorage.setItem('userId', res.data.userId);
-      setAuthState({
-        token: res.data.token,
-        userId: res.data.userId,
-      });
-    })
-    .catch(error => console.log(error))
+      .then(res => {
+        console.log(res)
+        JSON.stringify(localStorage.setItem('token', res.data.jwtToken));
+        JSON.stringify(localStorage.setItem('userId', res.data.userId));
+        setAuthState({
+          token: res.data.token,
+          userId: res.data.userId,
+        });
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your Register Success Full",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      })
+      .catch(error => {
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: "Email doesn't have to exist",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        console.log(error)})
     // localStorage.setItem('token', res.data.token);
     // setAuthState({
     //   token: res.data.token,
