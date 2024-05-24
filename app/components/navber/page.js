@@ -8,13 +8,13 @@ import { AuthContext } from '@/app/Provider/AuthContext';
 export default function Navbar() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
-    const { authState,logout, } = useContext(AuthContext);
+    const { authState, logout, } = useContext(AuthContext);
     const [user, setUser] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
-   const handaleLogOut=()=>{
-logout()
+    const handaleLogOut = () => {
+        logout()
     }
     useEffect(() => {
         // Define an async function to fetch user data
@@ -39,7 +39,7 @@ logout()
         } else {
             setLoading(false);
         }
-    }, [authState,logout]);
+    }, [authState, logout]);
 
     console.log(user)
 
@@ -55,33 +55,33 @@ logout()
                     <Link className={`link ${pathname === '/' ? 'text-red-600' : 'text-red-400'}`} href="/">
                         Home
                     </Link>
-                    <Link href="/profile">
+                    <Link href="/profile" className={`link ${pathname === '/profile' ? 'text-red-600' : 'text-red-400'}`}>
                         <p className="text-white hover:text-gray-400">Profile</p>
                     </Link>
-                    <Link href="/create">
+                    <Link href="/create" className={`link ${pathname === '/create' ? 'text-red-600' : 'text-red-400'}`}>
                         <p className="text-white hover:text-gray-400">CreatePost</p>
                     </Link>
-                    <Link href="/allpost">
+                    <Link href="/allpost" className={`link ${pathname === '/allpost' ? 'text-red-600' : 'text-red-400'}`}>
                         <p className="text-white hover:text-gray-400">My Post</p>
                     </Link>
-                    
+
                 </div>
                 <div className="hidden gap-3 md:flex">
                     {
                         user ? <div className='gap-3 md:flex items-center'>
                             <h2 className='text-white'>Name: {user.name}</h2>
                             <Button
-                            onClick={handaleLogOut}
+                                onClick={handaleLogOut}
                                 label="Log Out"
                                 primary
                             />
                         </div> : <div>
                             <Link href="/signup">
-                            <Button
-                                label="SignUp"
-                                primary
-                            />
-                        </Link>
+                                <Button
+                                    label="SignUp"
+                                    primary
+                                />
+                            </Link>
 
                             <Link href="/login">
                                 <Button
@@ -128,19 +128,21 @@ logout()
                     <Link className={`link ${pathname === '/' ? 'text-red-600' : 'text-red-400'}`} href="/">
                         Home
                     </Link>
-                    <Link href="/about">
-                        <p className="block text-white px-2 py-1 hover:bg-gray-700">About</p>
+                    <Link href="/profile" className={`link ${pathname === '/profile' ? 'text-red-600' : 'text-red-400'}`}>
+                        <p className="text-white hover:text-gray-400">Profile</p>
                     </Link>
-                    <Link href="/services">
-                        <p className="block text-white px-2 py-1 hover:bg-gray-700">Services</p>
+                    <Link href="/create" className={`link ${pathname === '/create' ? 'text-red-600' : 'text-red-400'}`}>
+                        <p className="text-white hover:text-gray-400">CreatePost</p>
                     </Link>
-                    <Link href="/contact">
-                        <p className="block text-white px-2 py-1 hover:bg-gray-700">Contact</p>
+                    <Link href="/allpost" className={`link ${pathname === '/allpost' ? 'text-red-600' : 'text-red-400'}`}>
+                        <p className="text-white hover:text-gray-400">My Post</p>
+                    </Link>
+                    <Link href="/login">
+                        <button className="block w-full text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 mt-2 rounded">
+                            Login
+                        </button>
                     </Link>
 
-                    <button className="block w-full text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 mt-2 rounded">
-                        Login
-                    </button>
                 </div>
             )}
         </nav>
