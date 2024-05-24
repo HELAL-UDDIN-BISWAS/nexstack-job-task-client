@@ -13,7 +13,6 @@
 }
 .storybook-button--primary:hover{
   color: rgb(242, 242, 242);
-
   background-color: rgb(82, 82, 82);
 }
 .storybook-button--secondary {

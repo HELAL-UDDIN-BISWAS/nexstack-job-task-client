@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import './FormComponent.css'; // Import the CSS file
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const UserPostForm = () => {
   const [formData, setFormData] = useState({
@@ -31,9 +32,24 @@ const UserPostForm = () => {
     title,
     content
    }
-   await axios.post('http://localhost:5000/userpost',userpost)
-   .then(res=>console.log(res))
-   .catch(error=>console.log(error))
+   await axios.post('https://job-tasks.vercel.app/userpost',userpost)
+   .then(res=>{
+    Swal.fire({
+      icon: "success",
+      title: "Success",
+      text: "Data Post",
+      footer: '<a href="#">Why do I have this issue?</a>'
+    });
+    console.log(res)
+  })
+   .catch(error=>{
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Something went wrong!",
+      footer: '<a href="#">Why do I have this issue?</a>'
+    });
+    console.log(error)})
     console.log(userpost);
   };
 

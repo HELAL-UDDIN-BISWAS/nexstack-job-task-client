@@ -1,5 +1,6 @@
 "use client"
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const UpdatePost = ({params}) => {
     const{author,image,id,title,content}=params;
@@ -16,9 +17,25 @@ const UpdatePost = ({params}) => {
             title,
             content
         }
-        await axios.put(`http://localhost:5000/userput/${id}`, userpost)
-            .then(res => console.log(res))
-            .catch(error => console.log(error))
+        await axios.put(`https://job-tasks.vercel.app/userput/${id}`, userpost)
+            .then(res => {
+              Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "data put",
+                footer: '<a href="#">Why do I have this issue?</a>'
+              });
+              console.log(res)
+            })
+            .catch(error => {
+              Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Something went wrong!",
+                footer: '<a href="#">Why do I have this issue?</a>'
+              });
+              console.log(error)
+            })
         console.log(userpost);
     };
     return (

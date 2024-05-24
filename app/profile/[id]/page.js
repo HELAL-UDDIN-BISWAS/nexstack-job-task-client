@@ -17,7 +17,7 @@ const UpdateUser = () => {
             email,
             password
         }
-await axios.put(`http://localhost:5000/user/${user?.id}`,Update)
+await axios.put(`https://job-tasks.vercel.app/user/${user?.id}`,Update)
 .then(res=>console.log(res))
 .catch(error=>console.log(error))
 

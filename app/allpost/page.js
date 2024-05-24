@@ -5,17 +5,17 @@ import { useEffect, useState } from "react";
 
 const AllPost = () => {
     const [allpost,setPost]=useState()
-    //     const response = await fetch("http://localhost:5000/allposts");
+    //     const response = await fetch("https://job-tasks.vercel.app/allposts");
     // const allpost = await response.json();
     useEffect(() => {
-        fetch('http://localhost:5000/allposts')
+        fetch('https://job-tasks.vercel.app/allposts')
           .then(res => res.json())
           .then(dataes => setPost(dataes))
           .catch(error => console.error('Error fetching ratings:', error));
       }, []);
     console.log(allpost);
     const handleDelete=(Id)=>{
-        axios.delete(`http://localhost:5000/deletepost/${Id}`)
+        axios.delete(`https://job-tasks.vercel.app/deletepost/${Id}`)
         .then(res=>console.log(res))
         .catch(err=>console.log(err))
         console.log(Id)

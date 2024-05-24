@@ -8,27 +8,27 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [authState, setAuthState] = useState({  });
-
+  const [authState, setAuthState] = useState({});
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem('token'))
-    const userId = JSON.parse(localStorage.getItem('userId'))
+    const token = localStorage.getItem('token')
+    const userId = localStorage.getItem('userId')
     const alltoken = {
       token,
       userId
     }
     setAuthState(alltoken)
   }, [])
+
   console.log(authState)
   const login = async (email, password) => {
-    const res = await axios.post('http://localhost:5000/login', { email, password })
+    const res = await axios.post('https://job-tasks.vercel.app/login', { email, password })
       .then(res => {
-        JSON.stringify(localStorage.setItem('token', res.data.token));
-        JSON.stringify(localStorage.setItem('userId', res.data.userId));
+        localStorage.setItem('token', res.data.token)
+       localStorage.setItem('userId', res.data.userId)
         setAuthState({
           token: res.data.token,
-          userId: res.data.userId,
+          user: res.data.userId
         });
         Swal.fire({
           position: "top-end",
@@ -38,7 +38,7 @@ export const AuthProvider = ({ children }) => {
           timer: 1500
         });
       })
-      .catch(error =>{
+      .catch(error => {
         Swal.fire({
           position: "top-end",
           icon: "error",
@@ -52,14 +52,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const register = async (name, email, password) => {
-    const res = await axios.post('http://localhost:5000/register', { name, email, password })
+    const res = await axios.post('https://job-tasks.vercel.app/register', { name, email, password })
       .then(res => {
         console.log(res)
-        JSON.stringify(localStorage.setItem('token', res.data.jwtToken));
-        JSON.stringify(localStorage.setItem('userId', res.data.userId));
+        localStorage.setItem('token', res.data.jwtToken);
+        localStorage.setItem('userId', res.data.userId);
         setAuthState({
-          token: res.data.token,
-          userId: res.data.userId,
+          token: res.data.jwtToken,
+          user: res.data.userId
         });
         Swal.fire({
           position: "top-end",
@@ -78,11 +78,11 @@ export const AuthProvider = ({ children }) => {
           timer: 1500
         });
         console.log(error)})
-    // localStorage.setItem('token', res.data.token);
-    // setAuthState({
-    //   token: res.data.token,
-    //   user: res.data.userId
-    // });
+    localStorage.setItem('token', res.data.token);
+    setAuthState({
+      token: res.data.token,
+      user: res.data.userId
+    });
   };
 
   const logout = () => {
@@ -94,11 +94,15 @@ export const AuthProvider = ({ children }) => {
     });
   };
   // =-=-=-=-=-=-
+  
   useEffect(() => {
-    // Define an async function to fetch user data
     const fetchUserData = async () => {
+      if (!authState.userId) {
+        setLoading(false);
+        return;
+      }
       try {
-        const response = await fetch(`http://localhost:5000/user/${authState.userId}`);
+        const response = await fetch(`https://job-tasks.vercel.app/user/${authState?.userId}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -111,14 +115,9 @@ export const AuthProvider = ({ children }) => {
       }
     };
 
-    // Fetch user data if userId is available
-    if (authState?.userId) {
-      fetchUserData();
-    } else {
-      setLoading(false);
-    }
-  }, []);
-
+    fetchUserData();
+  }, [authState.userId]);
+  
   return (
     <AuthContext.Provider value={{ authState, login, register, logout, user }}>
       {children}

@@ -9,10 +9,10 @@ const Profile = () => {
     const [token,setToken]=useState()
     const [userId,setUserId]=useState()
     const { user } = useContext(AuthContext);
-
+console.log(user)
     useEffect(()=>{
-        const token = JSON.parse(localStorage.getItem('token'))
-        const userId = JSON.parse(localStorage.getItem('userId'))
+        const token = localStorage.getItem('token')
+        const userId = localStorage.getItem('userId')
         setToken(token)
         setUserId(userId)
 

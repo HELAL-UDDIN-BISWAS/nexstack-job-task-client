@@ -20,7 +20,7 @@ logout()
         // Define an async function to fetch user data
         const fetchUserData = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/user/${authState.userId}`);
+                const response = await fetch(`https://job-tasks.vercel.app/user/${authState.userId}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

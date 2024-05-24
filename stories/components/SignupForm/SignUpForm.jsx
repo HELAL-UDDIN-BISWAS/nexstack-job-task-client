@@ -21,7 +21,7 @@ const SignupForm = ({handleSubmit}) => {
   //       email,
   //       password
   //   }
-  // // await axios.post('http://localhost:5000/register',SignUpUser)
+  // // await axios.post('https://job-tasks.vercel.app/register',SignUpUser)
   // //  .then(function (res) {
   // //   console.log(res);
   // //   localStorage.setItem('token', res.data.token);
