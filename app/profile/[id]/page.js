@@ -3,6 +3,7 @@
 import { AuthContext } from "@/app/Provider/AuthContext";
 import axios from "axios";
 import { useContext } from "react";
+import Swal from "sweetalert2";
 
 const UpdateUser = () => {
     const {user}=useContext(AuthContext);
@@ -18,8 +19,24 @@ const UpdateUser = () => {
             password
         }
 await axios.put(`https://job-tasks.vercel.app/user/${user?.id}`,Update)
-.then(res=>console.log(res))
-.catch(error=>console.log(error))
+.then(res=>{
+  Swal.fire({
+    icon: "success",
+    title: "Success",
+    text: "Data Post",
+    footer: '<a href="#">Why do I have this issue?</a>'
+  });
+  console.log(res)
+})
+.catch(error=>{
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    text: "Error Post",
+    footer: '<a href="#">Why do I have this issue?</a>'
+  });
+  console.log(error)
+})
 
         console.log(name,email,password)
       };

@@ -2,6 +2,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
 const AllPost = () => {
     const [allpost,setPost]=useState()
@@ -16,8 +17,24 @@ const AllPost = () => {
     console.log(allpost);
     const handleDelete=(Id)=>{
         axios.delete(`https://job-tasks.vercel.app/deletepost/${Id}`)
-        .then(res=>console.log(res))
-        .catch(err=>console.log(err))
+        .then(res=>{
+            Swal.fire({
+                icon: "success",
+                title: "Success",
+                text: "Data Post",
+                footer: '<a href="#">Why do I have this issue?</a>'
+              });
+            console.log(res)
+        })
+        .catch(err=>{
+            Swal.fire({
+                icon: "error",
+                title: "Error Delete",
+                text: "Delete Post",
+                footer: '<a href="#">Why do I have this issue?</a>'
+              });
+            console.log(err)
+        })
         console.log(Id)
     }
     return (
