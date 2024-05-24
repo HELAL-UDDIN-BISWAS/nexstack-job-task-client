@@ -1,3 +1,18 @@
+
+
+GitHub Link Client: https://github.com/HELAL-UDDIN-BISWAS/nexstack-job-task-client;
+GitHub Link Server: https://github.com/HELAL-UDDIN-BISWAS/nexstack-job-task-server;
+Client Site Link: https://a-job-task-client.vercel.app/
+Server Site Link: https://job-tasks.vercel.app/
+storybook: https://665031f1e1c4d9efd9ee96d4--unique-flan-4ecc8f.netlify.app/?path=/docs/configure-your-project--docs
+
+Locall Link
+Client Site Start: npm run dev
+Server Site Start: nodemon index.js
+Client Site Link: http://localhost:3000/
+Server Site Link: http://localhost:5000/
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
